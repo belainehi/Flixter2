@@ -2,6 +2,7 @@ package com.immanuela.flixter.adapters;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,8 +16,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.immanuela.flixter.Movie;
+import com.immanuela.flixter.DetailActivity;
+import com.immanuela.flixter.models.Movie;
 import com.immanuela.flixter.R;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -79,17 +83,25 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
                 imageUrl = movie.getBackdropPath();
             }else {
                 //else imageUrl = poster image
-                int rating = (int) movie.getRating();
+              //  double rating = (int) movie.getRating();
                 // The measure of popularity is 90 or above for picking the poster type.
-                if (rating > 90) {
-                    imageUrl = movie.getBackdropPath();
-                    Log.i(TAG, "This is a popular movie so backdrop poster. ");
-                } else {
+
                     imageUrl = movie.getPosterPath();
-                    Log.i(TAG, "This is not that popular so just poster. ");
-                }
+                  //  Log.i(TAG, "This is not that popular so just poster. ");
+
             }
             Glide.with(context).load(imageUrl).into (ivPoster);
+            container.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 2. Navigate to a new activity when tapped
+                    Intent i = new Intent(context, DetailActivity.class);
+                    i.putExtra("title",movie.getTitle());
+                    i.putExtra("movie", Parcels.wrap(movie));
+                    context.startActivity(i);
+                }
+            });
+
 
 
         }
