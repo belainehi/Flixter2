@@ -23,7 +23,7 @@
 ### App Walkthough GIF
 
 
-<img src="https://imgur.com/qSDkqrX" width=250><br>
+<img src="https://github.com/belainehi/Flixter2/blob/master/Week%202%20Walkthrough.gif" width=250><br>
 
 ### Notes
 
